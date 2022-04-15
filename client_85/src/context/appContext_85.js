@@ -8,7 +8,7 @@ const initialState = {
     isLoading: false,
     showAlert: false,
     alterText: '',
-    alterType: ''
+    alterType: '',
 }
 
 const AppContext_85 = React.createContext();
