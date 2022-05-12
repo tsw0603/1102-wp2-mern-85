@@ -5,17 +5,21 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // db and authenticateUser
-import connectDB_85 from './db/connect_85.js'
+import connectDB_85 from './db/connect_85.js';
 
+// routes
+import authRoutes_85 from './routes/authRoutes_85.js';
 
 // middleware
 import notFoundMiddleware_85 from './middleware/not-found_85.js';
 import errorHandleMiddleware_85 from './middleware/error-handler_85.js';
 
 app.get('/',(req, res) => {
-    throw new Error('testing for error');
+    //throw new Error('testing for error');
     res.send('Welcome 湯士緯 209410785');
 });
+
+app.use('/api/v1/auth_85', authRoutes_85);
 
 app.use(notFoundMiddleware_85);
 app.use(errorHandleMiddleware_85);
