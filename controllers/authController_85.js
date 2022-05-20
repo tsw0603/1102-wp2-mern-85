@@ -1,9 +1,16 @@
 import User_85 from "../models/User_85.js";
 
-const register_85 = async (req, res) => {
+const register_85 = async (req, res, next) => {
+
+    try{
     console.log('body', req.body);
     const user = await User_85.create(req.body);
     res.status(201).json({ user });
+    } catch(err){
+        //res.status(500).json({msg:"Error on registering user"})
+        next(err);
+    }
+    
     //res.send('register user -- 湯士緯, 209410785');
 };
 

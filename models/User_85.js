@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-//import validator  from "validator";
+import validator  from "validator";
 //import bcrypt from 'bcryptjs';
 //import jwt from 'jsonwebtoken'
 
@@ -14,10 +14,10 @@ const UserSchema_85=new mongoose.Schema({
     email:{
         type: String,
         requires:[true,'please provide email'],
-        //validate:{
-        //    validator:validator.isEmail,
-        //    message:'please provide valid email'
-        //},
+        validate:{
+            validator:validator.isEmail,
+            message:'please provide valid email'
+        },
         unique:true
     },
     password:{
