@@ -14,6 +14,8 @@ import authRoutes_85 from './routes/authRoutes_85.js';
 import notFoundMiddleware_85 from './middleware/not-found_85.js';
 import errorHandleMiddleware_85 from './middleware/error-handler_85.js';
 
+app.use(express.json());
+
 app.get('/',(req, res) => {
     //throw new Error('testing for error');
     res.send('Welcome 湯士緯 209410785');
