@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import validator  from "validator";
-//import bcrypt from 'bcryptjs';
+import bcrypt from 'bcryptjs';
 //import jwt from 'jsonwebtoken'
 
 const UserSchema_85=new mongoose.Schema({
@@ -40,6 +40,12 @@ const UserSchema_85=new mongoose.Schema({
         default:'my city'
         
     },
+});
+
+UserSchema_85.pre('save',async function(){
+    console.log('password',this.password);
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password,salt);
 });
 
 export default mongoose.model('User_85', UserSchema_85);
