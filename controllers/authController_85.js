@@ -1,18 +1,22 @@
 import User_85 from "../models/User_85.js";
+import { StatusCodes } from "http-status-codes";
 
 const register_85 = async (req, res, next) => {
 
-    try{
     console.log('body', req.body);
     const user = await User_85.create(req.body);
     const token = user.createJWT();
-    console.log('token',token);
+    res.status(StatusCodes.CREATED).json({ user, token });
 
-    res.status(201).json({ user, token });
-    } catch(err){
-        //res.status(500).json({msg:"Error on registering user"})
-        next(err);
-    }
+    // try{
+    // console.log('body', req.body);
+    // const user = await User_85.create(req.body);
+    // const token = user.createJWT();
+    // res.status(201).json({ user, token });
+    // } catch(err){
+    //     //res.status(500).json({msg:"Error on registering user"})
+    //     next(err);
+    // }
     
     //res.send('register user -- 湯士緯, 209410785');
 };

@@ -51,7 +51,7 @@ UserSchema_85.pre('save',async function(){
 UserSchema_85.methods.createJWT =function(){
     console.log('this',this);
     return jwt.sign({ userId: this._id},
-         'jwtsecret',{expiresIn:'1d'})
+         process.env.JWT_SECRET,{expiresIn: process.env.JWT_LIFETIME})
 
        
     

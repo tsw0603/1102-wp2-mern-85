@@ -4,6 +4,10 @@ const app = express();
 import dotenv from 'dotenv';
 dotenv.config();
 
+import 'express-async-errors';
+
+import morgan from 'morgan';
+
 // db and authenticateUser
 import connectDB_85 from './db/connect_85.js';
 
@@ -13,6 +17,10 @@ import authRoutes_85 from './routes/authRoutes_85.js';
 // middleware
 import notFoundMiddleware_85 from './middleware/not-found_85.js';
 import errorHandleMiddleware_85 from './middleware/error-handler_85.js';
+
+if(process.env.NODE_ENV !== 'production'){
+    app.use(morgan('dev'));
+}
 
 app.use(express.json());
 
