@@ -7,7 +7,7 @@ dotenv.config();
 import 'express-async-errors';
 
 import morgan from 'morgan';
-//import cors from 'cors';
+import cors from 'cors';
 
 // db and authenticateUser
 import connectDB_85 from './db/connect_85.js';
@@ -23,11 +23,11 @@ if(process.env.NODE_ENV !== 'production'){
     app.use(morgan('dev'));
 }
 
-//app.use(cors());
+app.use(cors());
 app.use(express.json());
 
 app.get('/',(req, res) => {
-    //throw new Error('testing for error');
+
     //res.send('Welcome 湯士緯 209410785');
     res.json({ msg: 'Welcome 湯士緯 209410785'});
 });

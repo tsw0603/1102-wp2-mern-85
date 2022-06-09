@@ -1,6 +1,4 @@
 import { BrowserRouter, Routes, Route, Link} from 'react-router-dom'
-
-//import Landing_85 from "./pages/Landing_85";
 import styled from 'styled-components'
 import {Landing_85, Dashboard_85, Register_85, Error_85, TestFetchUseCors_85, TestFetchUseProxy_85} from './pages';
 

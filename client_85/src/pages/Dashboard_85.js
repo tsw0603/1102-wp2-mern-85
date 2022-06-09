@@ -1,10 +1,10 @@
-import TestFetchUseCors_85 from "./TestFetchUseCors_85"
+import React from "react";
 
 const Dashboard_85 = () => {
   return (
     <div>
       Dashboard
-      <TestFetchUseCors_85 />
+      
     </div>
   );
 };
