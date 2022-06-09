@@ -7,7 +7,7 @@ dotenv.config();
 import 'express-async-errors';
 
 import morgan from 'morgan';
-import cors from 'cors';
+//import cors from 'cors';
 
 // db and authenticateUser
 import connectDB_85 from './db/connect_85.js';
@@ -23,7 +23,7 @@ if(process.env.NODE_ENV !== 'production'){
     app.use(morgan('dev'));
 }
 
-app.use(cors());
+//app.use(cors());
 app.use(express.json());
 
 app.get('/',(req, res) => {
@@ -31,6 +31,10 @@ app.get('/',(req, res) => {
     //res.send('Welcome 湯士緯 209410785');
     res.json({ msg: 'Welcome 湯士緯 209410785'});
 });
+
+app.get('/api/v1',(req,res)=>{  
+    res.json({msg:'API v1 -- Welcome 209410785'})
+  });
 
 app.use('/api/v1/auth_85', authRoutes_85);
 
@@ -42,7 +46,7 @@ const port = process.env.PORT || 5000;
 
 const start = async () => {
     try{
-        await connectDB_85(process.env.MONGO_LOCAL_URL).then( () => {
+        await connectDB_85(process.env.MONGO_URL).then( () => {
             console.log('Connecting to MongoDB');
         });
         app.listen(port, () => console.log(`Server is running on port ${port}`));

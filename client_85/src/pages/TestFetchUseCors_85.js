@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useEffect } from 'react';
 
 const TestFetchUseCors_85 = async () => {
     const response = await fetch('http://localhost:5000');
