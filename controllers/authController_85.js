@@ -24,12 +24,12 @@ const register_85 = async (req, res, next) => {
 const login_85 = async (req, res) => {
     console.log('body',req.body);
     res.json({ msg: 'login user -- 湯士緯, 209410785' });
-    //const {email,password}=req.body;
-    //if(!email || !password){
-        //throw new BadRequestError('please provide all values')
+    const {email,password}=req.body;
+    if(!email || !password){
+        throw new BadRequestError('please provide all values')
     };
 
-    /*const user = await User_36.findOne({email}).select('+password');
+    const user = await User_36.findOne({email}).select('+password');
     
     if(!user){
         throw new UnAuthenticatedError('invalid Credentials')
@@ -48,7 +48,7 @@ const login_85 = async (req, res) => {
        token,
        location: user.location,
    });
-};*/
+};
 
 const updateUser_85 = async (req, res) => {
     res.send('Update user -- 湯士緯, 209410785');
