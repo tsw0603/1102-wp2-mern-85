@@ -6,7 +6,7 @@ const register_85 = async (req, res, next) => {
     console.log('body', req.body);
     const user = await User_85.create(req.body);
     const token = user.createJWT();
-    res.status(StatusCodes.CREATED).json({ user, token });
+    res.status(StatusCodes.CREATED).json({ user, token, location: user.location });
 
     // try{
     // console.log('body', req.body);
@@ -22,7 +22,31 @@ const register_85 = async (req, res, next) => {
 };
 
 const login_85 = async (req, res) => {
-    res.send('login user -- 湯士緯, 209410785');
+    console.log('body',req.body);
+    const {email,password}=req.body;
+    if(!email || !password){
+        throw new BadRequestError('please provide all values')
+    }
+
+    const user = await User_36.findOne({email}).select('+password');
+    
+    if(!user){
+        throw new UnAuthenticatedError('invalid Credentials')
+    }
+    console.log('login user',user);
+
+    const isPasswordCorrect = await user.comparePassword(password);
+    if(!isPasswordCorrect){
+        throw new UnAuthenticatedError('Invalid Credentials');
+    }
+
+    const token = user.createJWT();
+    user.password=undefined;
+    res.status(StatusCodes.OK).json({
+       user,
+       token,
+       location: user.location,
+   });
 };
 
 const updateUser_85 = async (req, res) => {

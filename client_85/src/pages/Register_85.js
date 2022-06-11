@@ -23,19 +23,35 @@ const Register_85 = () => {
     }
     
     const handleChange=(e)=>{
-        console.log('e.target',e.target);
+        //console.log('e.target',e.target);
         setValues({...values,[e.target.name]:e.target.value})
     }
 
     const onSubmit = (e)=>{
         e.preventDefault();
         //console.log('e.target',e.target);
-        const { email,password } = values;
-        if(!email || !password) {
+        const {name,email,password,isMember} =values;
+        if(!email||!password || !isMember &&!name) {
           displayAlert();
           return;
         }
-    };
+        const currentUser = {name,email,password};
+        console.log('form data',currentUser);
+        if(!isMember){
+          registerUser({
+            currentUser,
+            endPoint:'register_85',
+            alertText:'User created! Redirecting ...'
+
+          });
+        }else{
+         loginUser({
+           currentUser,
+           endPoint:'login_85',
+           alertText:'Login Successful! redirecting ...',
+         })
+        }
+    }
   return (
 
     <Wrapper>

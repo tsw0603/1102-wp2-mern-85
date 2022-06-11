@@ -1,4 +1,4 @@
-import { CLEAR_ALERT, DISPLAY_ALERT } from "./action_85"
+import { CLEAR_ALERT, DISPLAY_ALERT,REGISTER_USER_BEGIN,REGISTER_USER_SUCCESS,REGISTER_USER_ERROR,LOGIN_USER_BEGIN,LOGIN_USER_SUCCESS,LOGIN_USER_ERROR } from "./action_85"
 
 const reducer_85 = (state, action) => {
 
@@ -18,6 +18,58 @@ const reducer_85 = (state, action) => {
                 alertText: '',
                 alertType: '',
             }
+        }
+        if(action.type === REGISTER_USER_BEGIN){
+            return{...state,isLoading:true};
+        }
+        if(action.type===REGISTER_USER_SUCCESS){
+            return{
+                ...state,
+                isLoading:false,
+                showAlert:true,
+                alertText: action.payload.alertText,
+                alertType:'success',
+                user:action.payload.user,
+                token:action.payload.token,
+                location:action.payload.location,
+    
+            }
+        }
+        if(action.type===REGISTER_USER_ERROR){
+        return{
+            ...state,
+            isLoading:false,
+            showAlert:true,
+            alertType:'danger',
+            alertText:action.payload.msg,
+    
+        }
+        }
+        if(action.type === LOGIN_USER_BEGIN){
+            return{...state,isLoading:true};
+        }
+        if(action.type===LOGIN_USER_SUCCESS){
+            return{
+                ...state,
+                isLoading:false,
+                showAlert:true,
+                alertText: action.payload.alertText,
+                alertType:'success',
+                user:action.payload.user,
+                token:action.payload.token,
+                location:action.payload.location,
+    
+            }
+        }
+        if(action.type===LOGIN_USER_ERROR){
+        return{
+            ...state,
+            isLoading:false,
+            showAlert:true,
+            alertType:'danger',
+            alertText:action.payload.msg,
+    
+        }
         }
 
     throw new Error(`no such action: ${action.type}`);
