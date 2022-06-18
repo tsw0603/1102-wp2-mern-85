@@ -1,9 +1,9 @@
 import {useState,useEffect} from 'react';
-import{Logo_85,FormRow_85} from'../components/'
+import{Logo_85,FormRow_85,Alert_85} from'../components/'
 import Wrapper from '../assets/wrappers/Register_85'
 
 import { useAppContext } from '../context/appContext_85';
-import Alert_85 from '../components/Alert_85';
+import { useNavigate } from 'react-router-dom';
 
 const initialState={
     name:"",
@@ -15,8 +15,9 @@ const initialState={
 
 const Register_85 = () => {
     const [values,setValues]=useState(initialState);
+    const navigate = useNavigate();
 
-    const { showAlert, displayAlert} = useAppContext();
+    const { user, isLoading, showAlert, displayAlert, registerUser, loginUser } = useAppContext();
 
     const toggleMember = () => {
       setValues( {...values, isMember: !values.isMember} );
@@ -49,9 +50,18 @@ const Register_85 = () => {
            currentUser,
            endPoint:'login_85',
            alertText:'Login Successful! redirecting ...',
-         })
+         });
         }
-    }
+    };
+
+    useEffect(() => {
+      if (user) {
+        setTimeout(() => {
+          navigate('/');
+        }, 3000);
+      }
+    }, [user, navigate]);
+
   return (
 
     <Wrapper>
@@ -59,6 +69,7 @@ const Register_85 = () => {
     <Logo_85/>
     <h3> { values.isMember ? 'Login' : 'Register'} </h3>
     {showAlert && <Alert_85 />}
+    {/* name input */}
     {!values.isMember && (
       <FormRow_85
         type="text"
@@ -68,7 +79,7 @@ const Register_85 = () => {
         className='form-input'
     />
     ) }
-
+    {/* email input */}
      <FormRow_85
      type="email"
      name='email'
@@ -76,7 +87,9 @@ const Register_85 = () => {
      handleChange={handleChange}
      className='form-input'
     />
-      <FormRow_85
+
+    {/* password input */}
+    <FormRow_85
      type="password"
      name='password'
      value={values.password}
