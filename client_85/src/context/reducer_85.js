@@ -1,4 +1,18 @@
-import { CLEAR_ALERT, DISPLAY_ALERT,REGISTER_USER_BEGIN,REGISTER_USER_SUCCESS,REGISTER_USER_ERROR,LOGIN_USER_BEGIN,LOGIN_USER_SUCCESS,LOGIN_USER_ERROR,LOGOUT_USER, TOGGLE_SIDEBAR } from "./action_85"
+import { 
+    CLEAR_ALERT, 
+    DISPLAY_ALERT,
+    REGISTER_USER_BEGIN,
+    REGISTER_USER_SUCCESS,
+    REGISTER_USER_ERROR,
+    LOGIN_USER_BEGIN,
+    LOGIN_USER_SUCCESS,
+    LOGIN_USER_ERROR,
+    LOGOUT_USER, 
+    TOGGLE_SIDEBAR,
+    UPDATE_USER_BEGIN,
+    UPDATE_USER_SUCCESS,
+    UPDATE_USER_ERROR,
+} from "./action_85"
 import { initialState } from "./appContext_85";
 
 const reducer_85 = (state, action) => {
@@ -77,7 +91,7 @@ const reducer_85 = (state, action) => {
             return{
                 ...initialState,                
     
-            }
+            };
         }
     
         if(action.type === TOGGLE_SIDEBAR){
@@ -87,6 +101,31 @@ const reducer_85 = (state, action) => {
     
             }
         }
+
+        if (action.type === UPDATE_USER_BEGIN) {
+            return { ...state, isLoading: true };
+          }
+          if (action.type === UPDATE_USER_SUCCESS) {
+            return {
+              ...state,
+              isLoading: false,
+              token: action.payload.token,
+              user: action.payload.user,
+              location: action.payload.location,
+              showAlert: true,
+              alertType: 'success',
+              alertText: 'User Profile Updated!',
+            };
+          }
+          if (action.type === UPDATE_USER_ERROR) {
+            return {
+              ...state,
+              isLoading: false,
+              showAlert: true,
+              alertType: 'danger',
+              alertText: action.payload.msg,
+            };
+          }
 
     throw new Error(`no such action: ${action.type}`);
 

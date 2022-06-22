@@ -14,7 +14,7 @@ const Landing_85 = () => {
             <p>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt molestias quae velit totam inventore incidunt ratione officiis quibusdam quos quod autem quam dolores doloremque, possimus eum quaerat vero quis! Incidunt!
           </p>
-          <a href="#" className="btn btn-hero">Loging/Register</a>
+          <a href="/register" className="btn btn-hero">Loging/Register</a>
           </div>
           <div>
               <img src={main} alt="job hunt" className="img main-img"/>

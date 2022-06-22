@@ -1,5 +1,6 @@
 import User_85 from "../models/User_85.js";
 import { StatusCodes } from "http-status-codes";
+import {BadRequestError,UnAuthenticatedError} from '../errors/index.js'
 
 const register_85 = async (req, res, next) => {
 
@@ -51,7 +52,24 @@ const login_85 = async (req, res) => {
 };
 
 const updateUser_85 = async (req, res) => {
-    res.send('Update user -- 湯士緯, 209410785');
+    const { email, name, lastName, location, password } = req.body;
+    if (!email || !name || !lastName || !location || !password) {
+      throw new BadRequestError('Please provide all values');
+    }
+    console.log('body', req.body);
+    console.log('_id', req.user.userId);
+    const user = await User_xx.findOne({ _id: req.user.userId });
+    user.email = email;
+    user.name = name;
+    user.lastName = lastName;
+    user.location = location;
+    user.password = password;
+    console.log('user', user);
+    await user.save();
+    const token = user.createJWT();
+    res.status(StatusCodes.OK).json({ user, token, location: user.location });
+    // res.send('Update user -- Hsingtai, 123456789');
+    //res.send('Update user -- 湯士緯, 209410785');
 };
 
 export { register_85, login_85, updateUser_85 };
